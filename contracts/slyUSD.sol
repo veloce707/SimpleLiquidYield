@@ -11,10 +11,11 @@ contract SlyUSD is ERC20, Ownable {
         Ownable(initialOwner)
     {}
 
-    address public USDC;
+    address public USDC = 0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E;
     address public depositHandler;
 
     function mint(address to, uint256 amount) public onlyOwner {
+        ERC20(USDC).transferFrom(msg.sender, depositHandler, amount);
         _mint(to, amount);
     }
 }
